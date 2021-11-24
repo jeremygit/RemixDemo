@@ -12,7 +12,7 @@ export type PostAttributes = {
   title: string;
 };
 
-const postsPath = path.join(__dirname, '../posts');
+const postsPath = path.join(__dirname, '../data/posts');
 
 const isValidAttributes = (
   attributes: any
