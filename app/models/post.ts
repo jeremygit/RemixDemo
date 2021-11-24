@@ -12,6 +12,12 @@ export type PostAttributes = {
   title: string;
 };
 
+type PostNew = {
+  title: string;
+  slug: string;
+  markdown: string;
+};
+
 const postsPath = path.join(__dirname, '../data/posts');
 
 const isValidAttributes = (
@@ -57,4 +63,13 @@ export async function getPost(slug: string) {
     `Post ${filepath} is missing attributes`
   );
   return { slug, title: attributes.title }
+}
+
+export async function createPost(post: PostNew) {
+  const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
+  await fs.writeFile(
+    path.join(postsPath, post.slug + '.md'),
+    md
+  );
+  return getPost(post.slug);
 }
