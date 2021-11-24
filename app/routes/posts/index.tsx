@@ -3,16 +3,6 @@ import type { Post } from '~/models/post';
 import { getPosts } from '~/models/post';
 
 export const loader = () => {
-  // return [
-  //   {
-  //     slug: 'my-first-post',
-  //     title: 'My First Post'
-  //   },
-  //   {
-  //     slug: '90s-mixtape',
-  //     title: 'My Mixtape'
-  //   }
-  // ];
   return getPosts();
 }
 
