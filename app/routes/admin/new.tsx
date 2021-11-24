@@ -1,4 +1,19 @@
-import { Form } from 'remix';
+import { Form, redirect } from 'remix';
+import type { ActionFunction } from 'remix';
+import { createPost } from '~/models/post';
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  
+  const title = formData.get('title');
+  const slug = formData.get('slug');
+  const markdown = formData.get('markdown');
+
+  // Before error handing
+  await createPost({ title, slug, markdown });
+
+  return redirect('/admin');
+}
 
 export default function NewPost() {
   return (
