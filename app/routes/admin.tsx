@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'remix';
+import { Outlet, Link, useLoaderData } from 'remix';
 import type { Post } from '~/models/post';
 import { getPosts } from '~/models/post';
 import adminStyles from '~/styles/admin.css';
@@ -10,8 +10,14 @@ export const links = () => {
   }];
 }
 
+export const loader = () => {
+  return getPosts();
+}
+
 export default function Admin() {
+
   const posts = useLoaderData<Post[]>();
+
   return (
     <div className="admin">
       <nav>
@@ -28,7 +34,9 @@ export default function Admin() {
           ))
         }
       </ul>
-      <main></main>
+      <main>
+        <Outlet/>
+      </main>
     </div>
   );
 }
